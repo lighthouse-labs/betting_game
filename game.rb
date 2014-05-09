@@ -34,6 +34,23 @@ def generate_winning_number
   5
 end
 
+def perfect_guess?(guess, winning_number)
+  guess.to_i == winning_number
+end
+
+def increase_bank!(bet)
+  @bank = @bank - bet.to_i
+  @bank = @bank + (bet.to_i * 2)
+end
+
+def off_by_1?(guess, winning_number)
+  (guess.to_i - winning_number).abs == 1
+end
+
+def lose_bet!(bet)
+  @bank = @bank - bet.to_i
+end
+
 loop do
   bet = get_valid_bet
   # TODO: Player should be able to quit at this point
@@ -41,14 +58,13 @@ loop do
   guess = get_valid_guess
 
   # Compare the guess against the random number
-  if guess.to_i == winning_number
-    @bank = @bank - bet.to_i
-    @bank = @bank + (bet.to_i * 2)
+  if perfect_guess?(guess, winning_number)
     puts "You nailed it!"
-  elsif (guess.to_i - winning_number).abs == 1
+    increase_bank!(bet)
+  elsif off_by_1?(guess, winning_number)
     puts "Off by just one, you get to keep your doh!"
   else
-    @bank = @bank - bet.to_i
+    lose_bet!(bet)
     puts "Sorry, the real number was #{winning_number}"
   end
 
