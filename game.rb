@@ -16,15 +16,18 @@
 # * bank_balance = 100
 # * amount_won, wins, losses, player's name, etc ???
 
-bank = 100
+@bank = 100
+
+def get_valid_bet
+  puts "You have $#{@bank}, what's your bet?"
+  bet = gets.chomp
+  # TODO: Validate the bet (not too high or too low, a number)
+end
 
 loop do
 
-  puts "You have $#{bank}, what's your bet?"
-  bet = gets.chomp
-  # TODO: Validate the bet (not too high or too low, a number)
+  bet = get_valid_bet
   # TODO: Player should be able to quit at this point
-
 
   winning_number = 5 # FIXME: This should be rand between 1 and 10
 
@@ -34,15 +37,14 @@ loop do
 
   # Compare the guess against the random number
   if guess.to_i == winning_number
-    bank = bank - bet.to_i
-    bank = bank + (bet.to_i * 2)
+    @bank = @bank - bet.to_i
+    @bank = @bank + (bet.to_i * 2)
     puts "You nailed it!"
+  elsif (guess.to_i - winning_number).abs == 1
+    puts "Off by just one, you get to keep your doh!"
+  else
+    @bank = @bank - bet.to_i
+    puts "Sorry, the real number was #{winning_number}"
   end
-
-  
-
-
-
-
 
 end
