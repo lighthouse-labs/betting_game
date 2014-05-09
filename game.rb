@@ -51,12 +51,7 @@ def lose_bet!(bet)
   @bank = @bank - bet.to_i
 end
 
-loop do
-  bet = get_valid_bet
-  # TODO: Player should be able to quit at this point
-  winning_number = generate_winning_number # FIXME: This should be rand between 1 and 10
-  guess = get_valid_guess
-
+def evaluate_guess(guess, winning_number, bet)
   # Compare the guess against the random number
   if perfect_guess?(guess, winning_number)
     puts "You nailed it!"
@@ -67,5 +62,12 @@ loop do
     lose_bet!(bet)
     puts "Sorry, the real number was #{winning_number}"
   end
+end
 
+loop do
+  bet = get_valid_bet
+  # TODO: Player should be able to quit at this point
+  winning_number = generate_winning_number # FIXME: This should be rand between 1 and 10
+  guess = get_valid_guess
+  evaluate_guess(guess, winning_number, bet)
 end
