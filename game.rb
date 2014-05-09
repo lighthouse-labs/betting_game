@@ -24,16 +24,21 @@ def get_valid_bet
   # TODO: Validate the bet (not too high or too low, a number)
 end
 
-loop do
-
-  bet = get_valid_bet
-  # TODO: Player should be able to quit at this point
-
-  winning_number = 5 # FIXME: This should be rand between 1 and 10
-
+def get_valid_guess
   puts "Guess a number between 1 and 10"
   guess = gets.chomp
   # TODO: Validate the guess and don't crap out if the guess in invalid, ask again.
+end
+
+def generate_winning_number
+  5
+end
+
+loop do
+  bet = get_valid_bet
+  # TODO: Player should be able to quit at this point
+  winning_number = generate_winning_number # FIXME: This should be rand between 1 and 10
+  guess = get_valid_guess
 
   # Compare the guess against the random number
   if guess.to_i == winning_number
