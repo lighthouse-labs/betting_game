@@ -23,6 +23,8 @@ loop do
   puts "You have $#{bank}, what's your bet?"
   bet = gets.chomp
   # TODO: Validate the bet (not too high or too low, a number)
+  # TODO: Player should be able to quit at this point
+
 
   winning_number = 5 # FIXME: This should be rand between 1 and 10
 
@@ -30,7 +32,17 @@ loop do
   guess = gets.chomp
   # TODO: Validate the guess and don't crap out if the guess in invalid, ask again.
 
+  # Compare the guess against the random number
+  if guess.to_i == winning_number
+    bank = bank - bet.to_i
+    bank = bank + (bet.to_i * 2)
+    puts "You nailed it!"
+  end
+
   
+
+
+
 
 
 end
